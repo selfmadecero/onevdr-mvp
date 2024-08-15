@@ -2,12 +2,13 @@ import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Box, Typography, LinearProgress, Paper, Grid } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { uploadFile as uploadFileToStorage } from '../../services/storage';
+import { handleFileUpload } from '../../services/aiFileManager';
 
 interface UploadingFile {
   file: File;
   progress: number;
   status: 'uploading' | 'done' | 'error';
+  errorMessage?: string;
 }
 
 const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ onFileUploaded }) => {
@@ -21,7 +22,7 @@ const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ o
     }));
     setUploadingFiles(prev => [...prev, ...newFiles]);
 
-    newFiles.forEach(file => uploadFileToStorage(file.file));
+    newFiles.forEach(file => uploadFile(file));
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -37,24 +38,22 @@ const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ o
         prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'uploading' } : f)
       );
 
-      const downloadURL = await uploadFileToStorage(uploadingFile.file);
+      const fileData = await handleFileUpload(uploadingFile.file);
 
       setUploadingFiles(prev => 
         prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'done', progress: 100 } : f)
       );
 
-      onFileUploaded({
-        name: uploadingFile.file.name,
-        size: uploadingFile.file.size,
-        type: uploadingFile.file.type,
-        downloadURL,
-        uploadedAt: new Date(),
-      });
+      onFileUploaded(fileData);
 
     } catch (error) {
       console.error("Error uploading file:", error);
+      let errorMessage = "Unknown error occurred";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
       setUploadingFiles(prev => 
-        prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'error' } : f)
+        prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'error', errorMessage } : f)
       );
     }
   };
@@ -72,10 +71,10 @@ const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ o
         <input {...getInputProps()} />
         <CloudUploadIcon sx={{ fontSize: 48, color: '#1976d2', mb: 2 }} />
         <Typography variant="h6" gutterBottom>
-          {isDragActive ? "Drop the files here" : "Drag 'n' drop files here, or click to select files"}
+          {isDragActive ? "Great! Drop your files here" : "Drag and drop files here, or click to browse"}
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          Only PDF files up to 50MB are allowed. Maximum 10 files at once.
+          Upload PDF files (max 50MB each). You can upload up to 10 files at once.
         </Typography>
       </Box>
 
@@ -89,7 +88,7 @@ const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ o
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                   {file.status === 'uploading' ? 'Uploading...' :
-                   file.status === 'done' ? 'Done' : 'Error'}
+                   file.status === 'done' ? 'Done' : `Error: ${file.errorMessage}`}
                 </Typography>
               </Box>
               <LinearProgress 

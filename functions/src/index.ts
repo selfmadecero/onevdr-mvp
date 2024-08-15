@@ -1,16 +1,15 @@
-import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
-import * as pdfParse from 'pdf-parse';
-import axios from 'axios';
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
+import * as pdfParse from "pdf-parse";
+import axios from "axios";
 
 admin.initializeApp();
 
-const db = admin.firestore();
 const storage = admin.storage();
 
 export const processPDF = functions.firestore
-  .document('files/{fileId}')
-  .onCreate(async (snap, context) => {
+  .document("files/{fileId}")
+  .onCreate(async (snap) => {
     const fileData = snap.data();
     const filePath = fileData.filePath;
 
@@ -25,26 +24,26 @@ export const processPDF = functions.firestore
       // OpenAI API를 사용하여 문서 분석
       const openaiApiKey = functions.config().openai.key;
       const openaiResponse = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
+        "https://api.openai.com/v1/chat/completions",
         {
           model: "gpt-3.5-turbo",
           messages: [
             {
               role: "system",
-              content: "You are an AI assistant that analyzes documents and provides a summary and key points."
+              content: "You are an AI assistant that analyzes documents and provides a summary and key points.",
             },
             {
               role: "user",
-              content: `Analyze the following document and provide a summary and key points: ${pdfText.substring(0, 1000)}...`
-            }
-          ]
+              content: `Analyze the document and provide a summary and key points: ${pdfText.substring(0, 1000)}...`,
+            },
+          ],
         },
         {
           headers: {
-            'Authorization': `Bearer ${openaiApiKey}`,
-            'Content-Type': 'application/json'
-          }
-        }
+            "Authorization": `Bearer ${openaiApiKey}`,
+            "Content-Type": "application/json",
+          },
+        },
       );
 
       const analysis = openaiResponse.data.choices[0].message.content;
@@ -52,12 +51,11 @@ export const processPDF = functions.firestore
       // Firestore에 분석 결과 저장
       await snap.ref.update({
         analysis,
-        category: 'Analyzed', // 여기서 적절한 카테고리를 설정할 수 있습니다.
-        status: 'completed'
+        category: "Analyzed",
+        status: "completed",
       });
-
     } catch (error) {
       console.error("Error processing PDF:", error);
-      await snap.ref.update({ status: 'error' });
+      await snap.ref.update({status: "error"});
     }
   });

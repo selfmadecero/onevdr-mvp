@@ -1,0 +1,256 @@
+[debug] [2024-08-15T07:07:36.668Z] ----------------------------------------------------------------------
+[debug] [2024-08-15T07:07:36.670Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2024-08-15T07:07:36.670Z] CLI Version:   13.15.0
+[debug] [2024-08-15T07:07:36.670Z] Platform:      darwin
+[debug] [2024-08-15T07:07:36.670Z] Node Version:  v20.16.0
+[debug] [2024-08-15T07:07:36.670Z] Time:          Thu Aug 15 2024 16:07:36 GMT+0900 (Korean Standard Time)
+[debug] [2024-08-15T07:07:36.670Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-15T07:07:36.708Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-15T07:07:36.709Z] > authorizing via signed-in user (noah.taehwan@gmail.com)
+[debug] [2024-08-15T07:07:36.709Z] [iam] checking project onevdr-mvp-c46ff for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2024-08-15T07:07:36.710Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/onevdr-mvp-c46ff:testIamPermissions [none]
+[debug] [2024-08-15T07:07:36.710Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/onevdr-mvp-c46ff:testIamPermissions x-goog-quota-user=projects/onevdr-mvp-c46ff
+[debug] [2024-08-15T07:07:36.710Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/onevdr-mvp-c46ff:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2024-08-15T07:07:37.467Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/onevdr-mvp-c46ff:testIamPermissions 200
+[debug] [2024-08-15T07:07:37.467Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/onevdr-mvp-c46ff:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2024-08-15T07:07:37.467Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/onevdr-mvp-c46ff/serviceAccounts/onevdr-mvp-c46ff@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-08-15T07:07:37.467Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/onevdr-mvp-c46ff/serviceAccounts/onevdr-mvp-c46ff@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-08-15T07:07:37.814Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/onevdr-mvp-c46ff/serviceAccounts/onevdr-mvp-c46ff@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2024-08-15T07:07:37.815Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/onevdr-mvp-c46ff/serviceAccounts/onevdr-mvp-c46ff@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-08-15T07:07:37.816Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff [none]
+[debug] [2024-08-15T07:07:38.230Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff 200
+[debug] [2024-08-15T07:07:38.230Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff {"projectId":"onevdr-mvp-c46ff","projectNumber":"243161857142","displayName":"OneVDR","name":"projects/onevdr-mvp-c46ff","resources":{"hostingSite":"onevdr-mvp-c46ff","storageBucket":"onevdr-mvp-c46ff.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_98faddb3-4a5c-4f47-b7f7-eed0680c144c"}
+[info] 
+[info] === Deploying to 'onevdr-mvp-c46ff'...
+[info] 
+[info] i  deploying storage, firestore, functions, hosting 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] ✔  functions: Finished running predeploy script. 
+[info] i  storage: ensuring required API firebasestorage.googleapis.com is enabled... 
+[debug] [2024-08-15T07:07:42.559Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/firebasestorage.googleapis.com [none]
+[debug] [2024-08-15T07:07:42.559Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/firebasestorage.googleapis.com x-goog-quota-user=projects/onevdr-mvp-c46ff
+[debug] [2024-08-15T07:07:43.784Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/firebasestorage.googleapis.com 200
+[debug] [2024-08-15T07:07:43.785Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/firebasestorage.googleapis.com [omitted]
+[info] ✔  storage: required API firebasestorage.googleapis.com is enabled 
+[debug] [2024-08-15T07:07:43.785Z] >>> [apiv2][query] GET https://firebasestorage.googleapis.com/v1alpha/projects/onevdr-mvp-c46ff/defaultBucket [none]
+[debug] [2024-08-15T07:07:45.076Z] <<< [apiv2][status] GET https://firebasestorage.googleapis.com/v1alpha/projects/onevdr-mvp-c46ff/defaultBucket 200
+[debug] [2024-08-15T07:07:45.077Z] <<< [apiv2][body] GET https://firebasestorage.googleapis.com/v1alpha/projects/onevdr-mvp-c46ff/defaultBucket {"name":"projects/onevdr-mvp-c46ff/defaultBucket","location":"US","bucket":{"name":"projects/onevdr-mvp-c46ff/buckets/onevdr-mvp-c46ff.appspot.com"}}
+[info] i  firebase.storage: checking storage.rules for compilation errors... 
+[debug] [2024-08-15T07:07:45.079Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test [none]
+[debug] [2024-08-15T07:07:45.079Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test [omitted]
+[debug] [2024-08-15T07:07:46.273Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test 200
+[debug] [2024-08-15T07:07:46.274Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test {}
+[info] ✔  firebase.storage: rules file storage.rules compiled successfully 
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2024-08-15T07:07:46.277Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test [none]
+[debug] [2024-08-15T07:07:46.277Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test [omitted]
+[debug] [2024-08-15T07:07:47.324Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test 200
+[debug] [2024-08-15T07:07:47.324Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff:test {}
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2024-08-15T07:07:47.325Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff [none]
+[debug] [2024-08-15T07:07:47.698Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff 200
+[debug] [2024-08-15T07:07:47.698Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff {"projectId":"onevdr-mvp-c46ff","projectNumber":"243161857142","displayName":"OneVDR","name":"projects/onevdr-mvp-c46ff","resources":{"hostingSite":"onevdr-mvp-c46ff","storageBucket":"onevdr-mvp-c46ff.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_98faddb3-4a5c-4f47-b7f7-eed0680c144c"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2024-08-15T07:07:47.700Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-08-15T07:07:47.700Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/onevdr-mvp-c46ff
+[debug] [2024-08-15T07:07:47.701Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-08-15T07:07:47.701Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/onevdr-mvp-c46ff
+[debug] [2024-08-15T07:07:47.703Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudbuild.googleapis.com [none]
+[debug] [2024-08-15T07:07:47.703Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudbuild.googleapis.com x-goog-quota-user=projects/onevdr-mvp-c46ff
+[debug] [2024-08-15T07:07:47.705Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/artifactregistry.googleapis.com [none]
+[debug] [2024-08-15T07:07:47.705Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/artifactregistry.googleapis.com x-goog-quota-user=projects/onevdr-mvp-c46ff
+[debug] [2024-08-15T07:07:48.048Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudfunctions.googleapis.com 200
+[debug] [2024-08-15T07:07:48.049Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2024-08-15T07:07:48.801Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/runtimeconfig.googleapis.com 200
+[debug] [2024-08-15T07:07:48.801Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2024-08-15T07:07:48.802Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudbuild.googleapis.com 200
+[debug] [2024-08-15T07:07:48.802Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2024-08-15T07:07:48.816Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/artifactregistry.googleapis.com 200
+[debug] [2024-08-15T07:07:48.816Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/onevdr-mvp-c46ff/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2024-08-15T07:07:48.817Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff/adminSdkConfig [none]
+[debug] [2024-08-15T07:07:49.796Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff/adminSdkConfig 200
+[debug] [2024-08-15T07:07:49.796Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff/adminSdkConfig {"projectId":"onevdr-mvp-c46ff","storageBucket":"onevdr-mvp-c46ff.appspot.com","locationId":"us-central"}
+[debug] [2024-08-15T07:07:49.797Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff/configs [none]
+[debug] [2024-08-15T07:07:50.265Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff/configs 200
+[debug] [2024-08-15T07:07:50.265Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff/configs {}
+[debug] [2024-08-15T07:07:50.267Z] Validating nodejs source
+[debug] [2024-08-15T07:07:50.597Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts . --ignore-pattern '.eslintrc.js'",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0",
+    "pdf-parse": "^1.1.1",
+    "axios": "^1.6.7"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2024-08-15T07:07:50.597Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2024-08-15T07:07:50.598Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-08-15T07:07:50.602Z] Found firebase-functions binary at '/Users/noah/Documents/Documents - Noah(Personal)/coding/onevdr-mvp/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8628
+
+[debug] [2024-08-15T07:07:50.843Z] Got response from /__/functions.yaml {"endpoints":{"processPDF":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/onevdr-mvp-c46ff/databases/(default)/documents/files/{fileId}"},"retry":false},"labels":{},"entryPoint":"processPDF"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /Users/noah/Documents/Documents - Noah(Personal)/coding/onevdr-mvp/functions (87.77 KB) for uploading 
+[debug] [2024-08-15T07:07:55.877Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/onevdr-mvp-c46ff/locations/-/functions [none]
+[debug] [2024-08-15T07:07:56.834Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/onevdr-mvp-c46ff/locations/-/functions 200
+[debug] [2024-08-15T07:07:56.834Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/onevdr-mvp-c46ff/locations/-/functions {"functions":[{"name":"projects/onevdr-mvp-c46ff/locations/us-central1/functions/processPDF","eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","resource":"projects/onevdr-mvp-c46ff/databases/(default)/documents/files/{fileId}","service":"firestore.googleapis.com","failurePolicy":{}},"status":"ACTIVE","entryPoint":"processPDF","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"onevdr-mvp-c46ff@appspot.gserviceaccount.com","updateTime":"2024-08-15T07:07:23.315Z","versionId":"1","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"8994687a79f5e8694472400daf50c49da563d1bd"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-1096601226718.us-central1.cloudfunctions.appspot.com/2b296c91-975a-4628-8598-2a5e3d4820eb.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"onevdr-mvp-c46ff\",\"storageBucket\":\"onevdr-mvp-c46ff.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"onevdr-mvp-c46ff","EVENTARC_CLOUD_EVENT_SOURCE":"projects/onevdr-mvp-c46ff/locations/us-central1/functions/processPDF"},"runtime":"nodejs18","maxInstances":3000,"ingressSettings":"ALLOW_ALL","buildId":"81c92b0f-bd17-4798-b674-bae888acaa26","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/243161857142/locations/us-central1/builds/81c92b0f-bd17-4798-b674-bae888acaa26","dockerRegistry":"ARTIFACT_REGISTRY","automaticUpdatePolicy":{},"buildServiceAccount":"243161857142-compute@developer.gserviceaccount.com"}]}
+[debug] [2024-08-15T07:07:56.835Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/onevdr-mvp-c46ff/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2024-08-15T07:07:58.196Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/onevdr-mvp-c46ff/locations/-/functions 200
+[debug] [2024-08-15T07:07:58.196Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/onevdr-mvp-c46ff/locations/-/functions {}
+[debug] [2024-08-15T07:07:58.197Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff [none]
+[debug] [2024-08-15T07:07:58.605Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff 200
+[debug] [2024-08-15T07:07:58.605Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/onevdr-mvp-c46ff {"projectId":"onevdr-mvp-c46ff","projectNumber":"243161857142","displayName":"OneVDR","name":"projects/onevdr-mvp-c46ff","resources":{"hostingSite":"onevdr-mvp-c46ff","storageBucket":"onevdr-mvp-c46ff.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_98faddb3-4a5c-4f47-b7f7-eed0680c144c"}
+[debug] [2024-08-15T07:07:58.607Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions [none]
+[debug] [2024-08-15T07:07:58.607Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-08-15T07:07:59.896Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions 200
+[debug] [2024-08-15T07:07:59.896Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions {"name":"projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-08-15T07:07:59.897Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases pageSize=10&pageToken=
+[debug] [2024-08-15T07:08:01.091Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases 200
+[debug] [2024-08-15T07:08:01.091Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases {"releases":[{"name":"projects/onevdr-mvp-c46ff/releases/cloud.firestore","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7","createTime":"2024-08-15T00:41:53.460673Z","updateTime":"2024-08-15T07:03:22.228101Z"},{"name":"projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b","createTime":"2024-08-15T00:43:20.287425Z","updateTime":"2024-08-15T07:03:21.136675Z"}]}
+[debug] [2024-08-15T07:08:01.106Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b [none]
+[debug] [2024-08-15T07:08:02.170Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b 200
+[debug] [2024-08-15T07:08:02.170Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b [omitted]
+[info] i  storage: latest version of storage.rules already up to date, skipping upload... 
+[info] i  firestore: deploying indexes... 
+[debug] [2024-08-15T07:08:02.172Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases pageSize=10&pageToken=
+[debug] [2024-08-15T07:08:02.172Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2024-08-15T07:08:02.430Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases 200
+[debug] [2024-08-15T07:08:02.431Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases {"releases":[{"name":"projects/onevdr-mvp-c46ff/releases/cloud.firestore","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7","createTime":"2024-08-15T00:41:53.460673Z","updateTime":"2024-08-15T07:03:22.228101Z"},{"name":"projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b","createTime":"2024-08-15T00:43:20.287425Z","updateTime":"2024-08-15T07:03:21.136675Z"}]}
+[debug] [2024-08-15T07:08:02.431Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7 [none]
+[debug] [2024-08-15T07:08:03.283Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2024-08-15T07:08:03.284Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/-/indexes {"indexes":[{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgNiav4AK","queryScope":"COLLECTION","fields":[{"fieldPath":"toneAndStyle","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgJim14AK","queryScope":"COLLECTION","fields":[{"fieldPath":"categories","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgOjXh4EK","queryScope":"COLLECTION","fields":[{"fieldPath":"originalFileName","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgJj7z4EK","queryScope":"COLLECTION","fields":[{"fieldPath":"keywords.word","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgJjF9oIK","queryScope":"COLLECTION","fields":[{"fieldPath":"tags","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/files/indexes/CICAgJiUpoMK","queryScope":"COLLECTION","fields":[{"fieldPath":"originalFileName","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgNi47oMK","queryScope":"COLLECTION","fields":[{"fieldPath":"targetAudience","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/documents/indexes/CICAgOi3kJAK","queryScope":"COLLECTION","fields":[{"fieldPath":"potentialApplications","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"}]}
+[debug] [2024-08-15T07:08:03.285Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2024-08-15T07:08:03.495Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7 200
+[debug] [2024-08-15T07:08:03.496Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7 [omitted]
+[info] i  firestore: latest version of firestore.rules already up to date, skipping upload... 
+[debug] [2024-08-15T07:08:03.505Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 200
+[debug] [2024-08-15T07:08:03.506Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"fields":[{"name":"projects/onevdr-mvp-c46ff/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[info] i  firestore: The following indexes are defined in your project but are not present in your firestore indexes file:
+	(files) -- (originalFileName,ASCENDING) (uploadedAt,DESCENDING)  
+[debug] [2024-08-15T07:08:09.728Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"originalFileName","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[debug] [2024-08-15T07:08:09.729Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"categories","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[debug] [2024-08-15T07:08:09.729Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"tags","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[debug] [2024-08-15T07:08:09.729Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"keywords.word","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[debug] [2024-08-15T07:08:09.729Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"targetAudience","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[debug] [2024-08-15T07:08:09.729Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"toneAndStyle","order":"ASCENDING"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[debug] [2024-08-15T07:08:09.729Z] Skipping existing index: {"collectionGroup":"documents","queryScope":"COLLECTION","fields":[{"fieldPath":"potentialApplications","arrayConfig":"CONTAINS"},{"fieldPath":"uploadedAt","order":"DESCENDING"}]}
+[info] ✔  firestore: deployed indexes in firestore.indexes.json successfully for (default) database 
+[info] i  hosting[onevdr-mvp-c46ff]: beginning deploy... 
+[info] i  hosting[onevdr-mvp-c46ff]: found 14 files in build 
+[debug] [2024-08-15T07:08:09.747Z] [hosting] uploading with 200 concurrency
+[debug] [2024-08-15T07:08:09.752Z] [hosting] hash cache [YnVpbGQ] stored for 14 files
+[debug] [2024-08-15T07:08:09.752Z] [hosting][hash queue][FINAL] {"max":1,"min":0,"avg":0,"active":0,"complete":14,"success":14,"errored":0,"retried":0,"total":14,"elapsed":2}
+[debug] [2024-08-15T07:08:09.753Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f:populateFiles [none]
+[debug] [2024-08-15T07:08:09.753Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f:populateFiles {"files":{"/robots.txt":"391d14b3c2f8c9143a27a28c7399585142228d4d1bdbe2c87ac946de411fa9a2","/manifest.json":"4e1d3adad9ce7e17c0d13fac197f1c27091906f4ecf3909c9f51247bff345118","/logo512.png":"2356e0b814e58a349935c8de17226873d615d088a867d591fef48a64c80c9a2f","/logo192.png":"f66564670b5bfe49f3f04a5b63107bae60f4a7736f1d3b83aa0115f7acf45150","/index.html":"1653af42174a7d71eeff9e1509d35f8923d43d7a3c24c897af058c8daa007625","/favicon.ico":"1463be9bedc82e16f9364eec7a1f5152cbe56229401381eed65c1496cb884407","/asset-manifest.json":"b762dc37c875d3966634881aa22c1dacd25427ed56a31e794cad1e5cf91f1726","/static/js/main.d3c31ddf.js.map":"738168319f7470591d280a2c298cdd8f333c480ea902909646ec2221f0d8f5bd","/static/js/main.d3c31ddf.js.LICENSE.txt":"ec6d8e3f17bee5a45b2bf1a6b756909ea101e6e064af3e7f19469f3e672182b9","/static/js/main.d3c31ddf.js":"0fb36ba8ffcf097251e913d99fcd5d12694b00021f3ae7d97af91a4951214321","/static/js/453.9fcfc5f1.chunk.js.map":"edebc2eaa7c9761eafba51a18a064d541b0e3e94b9a252e8035d2a1dbae27976","/static/js/453.9fcfc5f1.chunk.js":"3bec80ff11c7bf18d5263a6c9626893b088d774b2dcd7be9852f31098e19c3ff","/static/css/main.b43b7fc8.css.map":"99cb0044fa818e23c3ab2e8931feb87904bc3ffd3fbeff2f571663dd3c77f8da","/static/css/main.b43b7fc8.css":"a12d67f804bea0deae37f13128d953181ff6b6490da640c2e643bf682c4d406f"}}
+[debug] [2024-08-15T07:08:10.563Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f:populateFiles 200
+[debug] [2024-08-15T07:08:10.564Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f:populateFiles {"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f/files"}
+[debug] [2024-08-15T07:08:10.564Z] [hosting][populate queue][FINAL] {"max":813,"min":813,"avg":813,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":813}
+[debug] [2024-08-15T07:08:10.564Z] [hosting] uploads queued: 0
+[debug] [2024-08-15T07:08:10.564Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1723705690564}
+[info] ✔  hosting[onevdr-mvp-c46ff]: file upload complete 
+[debug] [2024-08-15T07:08:10.564Z] [hosting] deploy completed after 832ms
+[debug] [2024-08-15T07:08:10.564Z] [rules] releasing firebase.storage/onevdr-mvp-c46ff.appspot.com with ruleset projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b
+[debug] [2024-08-15T07:08:10.565Z] >>> [apiv2][query] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com [none]
+[debug] [2024-08-15T07:08:10.565Z] >>> [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com {"release":{"name":"projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b"}}
+[debug] [2024-08-15T07:08:10.975Z] <<< [apiv2][status] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com 200
+[debug] [2024-08-15T07:08:10.975Z] <<< [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com {"name":"projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/cf3fecd7-3b3b-4f86-b27a-e2ed62b2ac1b","createTime":"2024-08-15T00:43:20.287425Z","updateTime":"2024-08-15T07:08:10.910520Z"}
+[debug] [2024-08-15T07:08:10.975Z] [rules] updated release projects/onevdr-mvp-c46ff/releases/firebase.storage/onevdr-mvp-c46ff.appspot.com
+[info] ✔  storage: released rules storage.rules to firebase.storage 
+[debug] [2024-08-15T07:08:10.975Z] [rules] releasing cloud.firestore/(default) with ruleset projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7
+[debug] [2024-08-15T07:08:10.976Z] >>> [apiv2][query] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/cloud.firestore/(default) [none]
+[debug] [2024-08-15T07:08:10.976Z] >>> [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/cloud.firestore/(default) {"release":{"name":"projects/onevdr-mvp-c46ff/releases/cloud.firestore/(default)","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7"}}
+[debug] [2024-08-15T07:08:12.040Z] <<< [apiv2][status] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/cloud.firestore/(default) 200
+[debug] [2024-08-15T07:08:12.040Z] <<< [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/onevdr-mvp-c46ff/releases/cloud.firestore/(default) {"name":"projects/onevdr-mvp-c46ff/releases/cloud.firestore","rulesetName":"projects/onevdr-mvp-c46ff/rulesets/bced7b82-13fe-4266-9a20-8c32c764a9e7","createTime":"2024-08-15T00:41:53.460673Z","updateTime":"2024-08-15T07:08:11.973634Z"}
+[debug] [2024-08-15T07:08:12.040Z] [rules] updated release projects/onevdr-mvp-c46ff/releases/cloud.firestore
+[info] ✔  firestore: released rules firestore.rules to cloud.firestore 
+[info] i  functions: Skipping the deploy of unchanged functions. 
+[info] ✔  functions[processPDF(us-central1)] Skipped (No changes detected) 
+[debug] [2024-08-15T07:08:12.043Z] Total Function Deployment time: 0
+[debug] [2024-08-15T07:08:12.043Z] 0 Functions Deployed
+[debug] [2024-08-15T07:08:12.043Z] 0 Functions Errored
+[debug] [2024-08-15T07:08:12.043Z] 0 Function Deployments Aborted
+[debug] [2024-08-15T07:08:12.043Z] Average Function Deployment time: NaN
+[info] i  functions: cleaning up build files... 
+[debug] [2024-08-15T07:08:12.340Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/onevdr-mvp-c46ff/locations/us-central1/repositories/gcf-artifacts/packages/process_p_d_f [none]
+[debug] [2024-08-15T07:08:12.341Z] >>> [apiv2][query] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list [none]
+[debug] [2024-08-15T07:08:12.759Z] <<< [apiv2][status] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list 404
+[debug] [2024-08-15T07:08:12.760Z] <<< [apiv2][body] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2024-08-15T07:08:12.760Z] Failed docker command with error  HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2024-08-15T07:08:12.762Z] >>> [apiv2][query] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list [none]
+[debug] [2024-08-15T07:08:13.057Z] <<< [apiv2][status] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list 404
+[debug] [2024-08-15T07:08:13.057Z] <<< [apiv2][body] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2024-08-15T07:08:13.058Z] Failed docker command with error  HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2024-08-15T07:08:13.159Z] >>> [apiv2][query] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list [none]
+[debug] [2024-08-15T07:08:13.440Z] <<< [apiv2][status] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list 404
+[debug] [2024-08-15T07:08:13.440Z] <<< [apiv2][body] GET https://us.gcr.io/v2/onevdr-mvp-c46ff/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2024-08-15T07:08:13.440Z] Failed docker command with error  HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2024-08-15T07:08:13.595Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/onevdr-mvp-c46ff/locations/us-central1/repositories/gcf-artifacts/packages/process_p_d_f 404
+[debug] [2024-08-15T07:08:13.595Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/onevdr-mvp-c46ff/locations/us-central1/repositories/gcf-artifacts/packages/process_p_d_f {"error":{"code":404,"message":"Package \"projects/onevdr-mvp-c46ff/locations/us-central1/repositories/gcf-artifacts/packages/process_p_d_f\" was not found.","status":"NOT_FOUND"}}
+[warn] ⚠  functions: Unhandled error cleaning up build images. This could result in a small monthly bill if not corrected. You can attempt to delete these images by redeploying or you can delete them manually at https://console.cloud.google.com/gcr/images/onevdr-mvp-c46ff/us/gcf 
+[debug] [2024-08-15T07:08:13.596Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "onevdr-mvp-c46ff"
+    },
+    "version": "projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f"
+  }
+]
+[info] i  hosting[onevdr-mvp-c46ff]: finalizing version... 
+[debug] [2024-08-15T07:08:13.597Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f updateMask=status%2Cconfig
+[debug] [2024-08-15T07:08:13.597Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f {"status":"FINALIZED","config":{}}
+[debug] [2024-08-15T07:08:14.029Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f 200
+[debug] [2024-08-15T07:08:14.029Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f {"name":"projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-08-15T07:07:59.452636Z","createUser":{"email":"noah.taehwan@gmail.com"},"finalizeTime":"2024-08-15T07:08:13.938605Z","finalizeUser":{"email":"noah.taehwan@gmail.com"}}
+[debug] [2024-08-15T07:08:14.029Z] [hosting] finalized version for onevdr-mvp-c46ff:[object Object]
+[info] ✔  hosting[onevdr-mvp-c46ff]: version finalized 
+[info] i  hosting[onevdr-mvp-c46ff]: releasing new version... 
+[debug] [2024-08-15T07:08:14.029Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/channels/live/releases versionName=projects%2F243161857142%2Fsites%2Fonevdr-mvp-c46ff%2Fversions%2F3dcc725b034c106f
+[debug] [2024-08-15T07:08:14.030Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/channels/live/releases {}
+[debug] [2024-08-15T07:08:14.742Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/channels/live/releases 200
+[debug] [2024-08-15T07:08:14.742Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/onevdr-mvp-c46ff/channels/live/releases {"name":"projects/243161857142/sites/onevdr-mvp-c46ff/channels/live/releases/1723705694060000","version":{"name":"projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-08-15T07:07:59.452636Z","createUser":{"email":"noah.taehwan@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLKy3jgdDK_FNl6V4VFAqj3g_omz44t5bzVqkreFhq7i56rBO0"},"finalizeTime":"2024-08-15T07:08:13.938605Z","finalizeUser":{"email":"noah.taehwan@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLKy3jgdDK_FNl6V4VFAqj3g_omz44t5bzVqkreFhq7i56rBO0"}},"type":"DEPLOY","releaseTime":"2024-08-15T07:08:14.060Z","releaseUser":{"email":"noah.taehwan@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLKy3jgdDK_FNl6V4VFAqj3g_omz44t5bzVqkreFhq7i56rBO0"}}
+[debug] [2024-08-15T07:08:14.742Z] [hosting] release: {"name":"projects/243161857142/sites/onevdr-mvp-c46ff/channels/live/releases/1723705694060000","version":{"name":"projects/243161857142/sites/onevdr-mvp-c46ff/versions/3dcc725b034c106f","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-08-15T07:07:59.452636Z","createUser":{"email":"noah.taehwan@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLKy3jgdDK_FNl6V4VFAqj3g_omz44t5bzVqkreFhq7i56rBO0"},"finalizeTime":"2024-08-15T07:08:13.938605Z","finalizeUser":{"email":"noah.taehwan@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLKy3jgdDK_FNl6V4VFAqj3g_omz44t5bzVqkreFhq7i56rBO0"}},"type":"DEPLOY","releaseTime":"2024-08-15T07:08:14.060Z","releaseUser":{"email":"noah.taehwan@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLKy3jgdDK_FNl6V4VFAqj3g_omz44t5bzVqkreFhq7i56rBO0"}}
+[info] ✔  hosting[onevdr-mvp-c46ff]: release complete 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/onevdr-mvp-c46ff/overview
+[info] Hosting URL: https://onevdr-mvp-c46ff.web.app

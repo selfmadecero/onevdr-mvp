@@ -5,10 +5,11 @@ import Sidebar from '../components/layout/Sidebar';
 import FileUploader from '../components/dataRoom/FileUploader';
 import SearchAndFilter from '../components/dataRoom/SearchAndFilter';
 import { auth } from '../config/firebase';
-import { getDocuments, deleteDocument } from '../services/firestore';
+import { getDocuments, deleteDocument, deleteFileDocument } from '../services/firestore';
 import { FileData } from '../types/fileTypes';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import { deleteFileFromStorage } from '../services/storage';
 
 const DataRoom: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<FileData[]>([]);
@@ -49,10 +50,28 @@ const DataRoom: React.FC = () => {
 
   const handleDeleteFile = async (fileId: string) => {
     try {
-      await deleteDocument('files', fileId);
+      const fileToDelete = uploadedFiles.find(file => file.id === fileId);
+      if (!fileToDelete) {
+        throw new Error('File not found');
+      }
+
+      // Firebase Storage에서 파일 삭제
+      if (fileToDelete.filePath) {
+        await deleteFileFromStorage(fileToDelete.filePath);
+      } else {
+        console.warn('File path is missing, unable to delete from storage');
+      }
+
+      // Firestore에서 문서 삭제
+      await deleteFileDocument(fileId);
+
+      // UI에서 파일 제거
       setUploadedFiles(prev => prev.filter(file => file.id !== fileId));
+
+      console.log('File successfully deleted from storage and database');
     } catch (error) {
       console.error('Error deleting file:', error);
+      // 여기에 사용자에게 오류 메시지를 표시하는 로직을 추가할 수 있습니다.
     }
   };
 

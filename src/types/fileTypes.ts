@@ -5,4 +5,5 @@ export interface FileData {
   uploadedAt: number;
   downloadURL: string;
   userId: string;
+  filePath: string;
 }

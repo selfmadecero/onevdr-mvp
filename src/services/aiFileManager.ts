@@ -39,6 +39,7 @@ export const handleFileUpload = async (file: File, onProgress: (progress: number
     const category = await classifyFile(file.name, ''); // 파일 내용 분석은 백그라운드에서 수행
     const optimizedFileName = await optimizeFileName(file.name, category);
 
+    const filePath = `documents/${user.uid}/${file.name}`;
     const fileData = {
       originalFileName: file.name,
       optimizedFileName,
@@ -48,7 +49,8 @@ export const handleFileUpload = async (file: File, onProgress: (progress: number
       isLatest: true,
       uploadedAt: new Date(),
       status: 'completed',
-      userId: user.uid
+      userId: user.uid,
+      filePath
     };
 
     const docId = await addDocument('files', fileData);

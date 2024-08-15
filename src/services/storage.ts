@@ -77,3 +77,16 @@ export const deleteFile = async (path: string) => {
     throw error;
   }
 };
+
+export const deleteFileFromStorage = async (filePath: string) => {
+  try {
+    if (!filePath || filePath.trim() === '') {
+      throw new Error("Invalid file path");
+    }
+    const fileRef = ref(storage, filePath);
+    await deleteObject(fileRef);
+  } catch (error) {
+    console.error("Error deleting file from storage: ", error);
+    throw error;
+  }
+};

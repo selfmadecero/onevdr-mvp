@@ -87,3 +87,12 @@ export const getDocumentVersions = async (collectionName: string, originalFileNa
     throw error;
   }
 };
+
+export const deleteFileDocument = async (fileId: string) => {
+  try {
+    await deleteDoc(doc(db, 'files', fileId));
+  } catch (error) {
+    console.error('Error deleting file document:', error);
+    throw error;
+  }
+};

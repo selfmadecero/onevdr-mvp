@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, List, ListItem, ListItemIcon, ListItemText, Paper } from '@mui/material';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
-export interface FileData {
+interface FileData {
   name: string;
   size: number;
   type: string;

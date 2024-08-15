@@ -28,10 +28,6 @@ export const handleFileUpload = async (file: File) => {
 
     const downloadURL = await uploadFile(file);
 
-    const fileContent = await file.text();
-    const category = await classifyFile(file.name, fileContent);
-    const optimizedFileName = await optimizeFileName(file.name, category);
-
     const latestVersion = await getLatestDocumentVersion('files', file.name) as FileDocument | null;
     let version = 1;
 
@@ -42,27 +38,20 @@ export const handleFileUpload = async (file: File) => {
 
     const fileData = {
       originalFileName: file.name,
-      optimizedFileName,
-      category,
+      optimizedFileName: file.name,
+      category: 'Uncategorized',
       downloadURL,
       version,
       isLatest: true,
       uploadedAt: new Date(),
-      status: 'processing',
-      userId: user.uid
+      status: 'processing'
     };
 
     const docId = await addDocument('files', fileData);
 
-    await updateDocument('files', docId, { status: 'analyzing' });
-
     return { ...fileData, id: docId };
   } catch (error) {
     console.error("Error handling file upload: ", error);
-    if (error instanceof Error) {
-      throw new Error(`File upload failed: ${error.message}`);
-    } else {
-      throw new Error("File upload failed due to an unknown error");
-    }
+    throw error;
   }
 };

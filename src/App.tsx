@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Auth from './pages/Auth';
 import DataRoom from './pages/DataRoom';
+import Team from './pages/Team';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/data-room" element={<DataRoom />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
           </main>
           <Footer />

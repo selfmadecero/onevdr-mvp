@@ -7,8 +7,8 @@ import theme from './styles/theme';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Auth from './pages/Auth';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
           </main>

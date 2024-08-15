@@ -1,19 +1,63 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+import * as pdfParse from 'pdf-parse';
+import axios from 'axios';
 
-// import {onRequest} from "firebase-functions/v2/https";
-// import * as logger from "firebase-functions/logger";
+admin.initializeApp();
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+const db = admin.firestore();
+const storage = admin.storage();
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+export const processPDF = functions.firestore
+  .document('files/{fileId}')
+  .onCreate(async (snap, context) => {
+    const fileData = snap.data();
+    const filePath = fileData.filePath;
+
+    try {
+      const bucket = storage.bucket();
+      const [fileContents] = await bucket.file(filePath).download();
+
+      // PDF 내용 추출
+      const pdfData = await pdfParse(fileContents);
+      const pdfText = pdfData.text;
+
+      // OpenAI API를 사용하여 문서 분석
+      const openaiApiKey = functions.config().openai.key;
+      const openaiResponse = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: "You are an AI assistant that analyzes documents and provides a summary and key points."
+            },
+            {
+              role: "user",
+              content: `Analyze the following document and provide a summary and key points: ${pdfText.substring(0, 1000)}...`
+            }
+          ]
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${openaiApiKey}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      const analysis = openaiResponse.data.choices[0].message.content;
+
+      // Firestore에 분석 결과 저장
+      await snap.ref.update({
+        analysis,
+        category: 'Analyzed', // 여기서 적절한 카테고리를 설정할 수 있습니다.
+        status: 'completed'
+      });
+
+    } catch (error) {
+      console.error("Error processing PDF:", error);
+      await snap.ref.update({ status: 'error' });
+    }
+  });

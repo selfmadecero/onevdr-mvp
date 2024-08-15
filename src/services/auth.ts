@@ -1,2 +1,10 @@
-// API 관련 함수들을 여기에 추가합니다.
-export {};
+import { auth } from '../config/firebase';
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
+};

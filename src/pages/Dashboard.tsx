@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Typography, Container, Grid, Paper, Button, Box } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { auth } from '../config/firebase';
+import React, { useContext } from 'react';
+import { Typography, Container, Grid, Paper, Button, Box, CircularProgress } from '@mui/material';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
+import AuthContext from '../context/AuthContext';
 
 const Dashboard: React.FC = () => {
-  const [user, setUser] = useState(auth.currentUser);
-  const navigate = useNavigate();
+  const { user, loading } = useContext(AuthContext);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        navigate('/login');
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
+  if (loading) {
+    return <CircularProgress />;
+  }
 
   if (!user) {
-    return null;
+    return <Navigate to="/auth" />;
   }
 
   return (
@@ -67,5 +58,6 @@ const Dashboard: React.FC = () => {
     </Box>
   );
 };
+
 
 export default Dashboard;

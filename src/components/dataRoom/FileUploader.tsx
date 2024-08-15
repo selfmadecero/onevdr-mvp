@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Box, Typography, LinearProgress, Paper, Grid } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { uploadFile as uploadFileToStorage } from '../../services/storage';
+import { handleFileUpload } from '../../services/aiFileManager';
 
 interface UploadingFile {
   file: File;
@@ -10,7 +11,11 @@ interface UploadingFile {
   status: 'uploading' | 'done' | 'error';
 }
 
-const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ onFileUploaded }) => {
+interface FileUploaderProps {
+  onFileUploaded: (fileData: any) => void;
+}
+
+const FileUploader: React.FC<FileUploaderProps> = ({ onFileUploaded }) => {
   const [uploadingFiles, setUploadingFiles] = useState<UploadingFile[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -21,7 +26,7 @@ const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ o
     }));
     setUploadingFiles(prev => [...prev, ...newFiles]);
 
-    newFiles.forEach(file => uploadFileToStorage(file.file));
+    newFiles.forEach(file => uploadFile(file));
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -37,25 +42,25 @@ const FileUploader: React.FC<{ onFileUploaded: (fileData: any) => void }> = ({ o
         prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'uploading' } : f)
       );
 
-      const downloadURL = await uploadFileToStorage(uploadingFile.file);
+      const updateProgress = (progress: number) => {
+        setUploadingFiles(prev =>
+          prev.map(f => f.file === uploadingFile.file ? { ...f, progress } : f)
+        );
+      };
+
+      const fileData = await handleFileUpload(uploadingFile.file, updateProgress);
 
       setUploadingFiles(prev => 
         prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'done', progress: 100 } : f)
       );
 
-      onFileUploaded({
-        name: uploadingFile.file.name,
-        size: uploadingFile.file.size,
-        type: uploadingFile.file.type,
-        downloadURL,
-        uploadedAt: new Date(),
-      });
-
+      onFileUploaded(fileData);
     } catch (error) {
       console.error("Error uploading file:", error);
       setUploadingFiles(prev => 
-        prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'error' } : f)
+        prev.map(f => f.file === uploadingFile.file ? { ...f, status: 'error', progress: 0 } : f)
       );
+      // 사용자에게 오류 메시지를 표시하는 로직을 여기에 추가하세요
     }
   };
 

@@ -1,19 +1,31 @@
-import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject, UploadTask } from 'firebase/storage';
 import { storage } from '../config/firebase';
 import { addDocument } from './firestore';
 import { getCurrentUser } from './auth';
 import { User } from 'firebase/auth';
 
-export const uploadFile = async (file: File) => {
+export const uploadFile = async (file: File, onProgress?: (progress: number) => void): Promise<string> => {
   try {
-    const user = await getCurrentUser() as User | null;
+    const user = await getCurrentUser();
     if (!user) {
       throw new Error("User not authenticated");
     }
 
     const path = `documents/${user.uid}/${file.name}`;
     const storageRef = ref(storage, path);
-    const snapshot = await uploadBytes(storageRef, file);
+
+    const uploadTask: UploadTask = uploadBytesResumable(storageRef, file);
+
+    if (onProgress) {
+      uploadTask.on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          onProgress(progress);
+        }
+      );
+    }
+
+    const snapshot = await uploadTask;
     const downloadURL = await getDownloadURL(snapshot.ref);
     
     // Firestore에 문서 정보 저장

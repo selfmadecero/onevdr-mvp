@@ -18,7 +18,7 @@ interface FileDocument {
   // 다른 필요한 속성들을 여기에 추가하세요
 }
 
-export const handleFileUpload = async (file: File) => {
+export const handleFileUpload = async (file: File, onProgress: (progress: number) => void) => {
   try {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -26,7 +26,7 @@ export const handleFileUpload = async (file: File) => {
       throw new Error("User not authenticated");
     }
 
-    const downloadURL = await uploadFile(file);
+    const downloadURL = await uploadFile(file, onProgress);
 
     const latestVersion = await getLatestDocumentVersion('files', file.name) as FileDocument | null;
     let version = 1;
@@ -36,15 +36,19 @@ export const handleFileUpload = async (file: File) => {
       await updateDocument('files', latestVersion.id, { isLatest: false });
     }
 
+    const category = await classifyFile(file.name, ''); // 파일 내용 분석은 백그라운드에서 수행
+    const optimizedFileName = await optimizeFileName(file.name, category);
+
     const fileData = {
       originalFileName: file.name,
-      optimizedFileName: file.name,
-      category: 'Uncategorized',
+      optimizedFileName,
+      category,
       downloadURL,
       version,
       isLatest: true,
       uploadedAt: new Date(),
-      status: 'processing'
+      status: 'completed',
+      userId: user.uid
     };
 
     const docId = await addDocument('files', fileData);

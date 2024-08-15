@@ -56,6 +56,6 @@ export const processPDF = functions.firestore
       });
     } catch (error) {
       console.error("Error processing PDF:", error);
-      await snap.ref.update({status: "error"});
+      await snap.ref.update({ status: "error" });
     }
   });

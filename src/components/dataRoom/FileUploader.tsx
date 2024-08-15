@@ -77,7 +77,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileUploaded }) => {
         <input {...getInputProps()} />
         <CloudUploadIcon sx={{ fontSize: 48, color: '#1976d2', mb: 2 }} />
         <Typography variant="h6" gutterBottom>
-          {isDragActive ? "Drop the files here" : "Drag 'n' drop files here, or click to select files"}
+          {isDragActive ? "Drop the files here" : "Drag and drop files here, or click to select files"}
         </Typography>
         <Typography variant="body2" color="textSecondary">
           Only PDF files up to 50MB are allowed. Maximum 10 files at once.

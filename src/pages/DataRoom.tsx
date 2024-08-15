@@ -5,11 +5,13 @@ import Sidebar from '../components/layout/Sidebar';
 import FileUploader from '../components/dataRoom/FileUploader';
 import SearchAndFilter from '../components/dataRoom/SearchAndFilter';
 import { auth } from '../config/firebase';
-import { getDocuments, deleteDocument, deleteFileDocument } from '../services/firestore';
+import { getDocuments, deleteDocument } from '../services/firestore';
 import { FileData } from '../types/fileTypes';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { deleteFileFromStorage } from '../services/storage';
+import { collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 const DataRoom: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<FileData[]>([]);
@@ -52,25 +54,47 @@ const DataRoom: React.FC = () => {
     try {
       const fileToDelete = uploadedFiles.find(file => file.id === fileId);
       if (!fileToDelete) {
-        throw new Error('File not found');
+        throw new Error('파일을 찾을 수 없습니다');
       }
 
-      // Firebase Storage에서 파일 삭제
+      // Firebase Storage에서 파일 삭제 시도
       if (fileToDelete.filePath) {
-        await deleteFileFromStorage(fileToDelete.filePath);
-      } else {
-        console.warn('File path is missing, unable to delete from storage');
+        try {
+          await deleteFileFromStorage(fileToDelete.filePath);
+          console.log('파일이 Firebase Storage에서 성공적으로 삭제되었습니다');
+        } catch (storageError) {
+          console.warn('Firebase Storage에서 파일 삭제 중 오류 발생:', storageError);
+          // 파일이 이미 삭제되었거나 존재하지 않는 경우, 계속 진행
+        }
       }
 
       // Firestore에서 문서 삭제
-      await deleteFileDocument(fileId);
+      await deleteDocument('files', fileId);
+      console.log('파일이 Firestore의 files 컬렉션에서 성공적으로 삭제되었습니다');
+
+      // documents 컬렉션에서도 문서 삭제 (만약 존재한다면)
+      try {
+        const documentsRef = collection(db, 'documents');
+        const q = query(documentsRef, where('filePath', '==', fileToDelete.filePath));
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+          const docToDelete = querySnapshot.docs[0];
+          await deleteDoc(docToDelete.ref);
+          console.log('문서가 Firestore의 documents 컬렉션에서 성공적으로 삭제되었습니다');
+        } else {
+          console.log('documents 컬렉션에서 삭제할 문서를 찾을 수 없습니다');
+        }
+      } catch (error) {
+        console.error('documents 컬렉션에서 문서를 삭제하는 중 오류 발생:', error);
+      }
 
       // UI에서 파일 제거
       setUploadedFiles(prev => prev.filter(file => file.id !== fileId));
 
-      console.log('File successfully deleted from storage and database');
+      console.log('파일이 데이터베이스에서 성공적으로 삭제되었습니다');
     } catch (error) {
-      console.error('Error deleting file:', error);
+      console.error('파일 삭제 중 오류 발생:', error);
       // 여기에 사용자에게 오류 메시지를 표시하는 로직을 추가할 수 있습니다.
     }
   };

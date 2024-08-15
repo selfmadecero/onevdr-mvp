@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Auth from './pages/Auth';
+import DataRoom from './pages/DataRoom';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/data-room" element={<DataRoom />} />
           </Routes>
           </main>
           <Footer />

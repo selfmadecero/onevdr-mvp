@@ -57,30 +57,16 @@ const Header: React.FC = () => {
         </Typography>
         <Box>
           {user ? (
-            <>
-              <Button 
-                color="primary" 
-                component={Link} 
-                to="/dashboard" 
-                startIcon={<DashboardIcon />}
-                sx={{ 
-                  marginRight: 2,
-                  fontWeight: 'medium',
-                }}
-              >
-                Dashboard
-              </Button>
-              <Button 
-                color="primary" 
-                onClick={handleLogout}
-                startIcon={<LogoutIcon />}
-                sx={{ 
-                  fontWeight: 'medium',
-                }}
-              >
-                Logout
-              </Button>
-            </>
+            <Button 
+              color="primary" 
+              onClick={handleLogout}
+              startIcon={<LogoutIcon />}
+              sx={{ 
+                fontWeight: 'medium',
+              }}
+            >
+              Logout
+            </Button>
           ) : (
             <Button 
               color="primary" 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
+import { Container, Typography, Box, Button, Paper } from '@mui/material';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
@@ -19,19 +19,23 @@ const Auth: React.FC = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
+    <Container component="main" maxWidth="sm" sx={{ mt: 12, mb: 4 }}>
+      <Paper
+        elevation={3}
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          padding: 4,
+          borderRadius: 4,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'blur(10px)',
         }}
       >
-        <Typography component="h1" variant="h5" gutterBottom>
+        <Typography component="h1" variant="h4" gutterBottom fontWeight="bold">
           Welcome to OneVDR
         </Typography>
-        <Typography variant="body1" align="center" sx={{ mb: 3 }}>
+        <Typography variant="body1" align="center" sx={{ mb: 4 }}>
           Sign in or create an account to get started
         </Typography>
         <Button
@@ -41,10 +45,17 @@ const Auth: React.FC = () => {
           onClick={handleGoogleAuth}
           startIcon={<GoogleIcon />}
           size="large"
+          sx={{
+            borderRadius: 50,
+            padding: '12px 0',
+            fontWeight: 'bold',
+            textTransform: 'none',
+            fontSize: '1rem',
+          }}
         >
           Continue with Google
         </Button>
-      </Box>
+      </Paper>
     </Container>
   );
 };
